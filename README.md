@@ -4,6 +4,6 @@ PROJECT MEMBERS
 
 | StdID  | Name |
 | ------------- | ------------- |
-| <b>63669</b>  | <b>Sabaha Khan</b>  |
+| <b>63669</b>  | <b>Sabahat</b>  |
 | 63624  | Syed Zulqarnain  |
 | 63626  | Syed Muhammad Usman  | 
