@@ -1,4 +1,4 @@
-var taInput = "", divOutput;
+var taInput, divOutput;
 var btnRun;
 
 window.onload = function() {
@@ -9,40 +9,119 @@ window.onload = function() {
 } //end window.onload
 
 function runFwAlgo(){
-	console.log("Running Floyd Warshall")
+	console.log("Running Warshall")
 	divOutput.innerHTML="<p>Transitive Closure of the Relation Is:</p>"
-	 values = FwAlgo();
-	for(var i = 0; i < 4; i++)
-	{
-		divOutput.innerHTML+=values[i] + '<br />';
-
-	}
-	//Get Input from
+	FwAlgo();
+	//Get Input from 
 }//end run
 
 function FwAlgo(){
-	var value = taInput.value.split('\n');
+  var input_array = [];
 
-	var graph = [];
-	for (i = 0; i < 4; ++i) {
-		graph.push([]);
-		for (j = 0; j < 4; ++j)
-			graph[i].push(i == j ? 0 : 9999999);
-	}
+  var input_val = taInput.value;
 
-	for (i = 1; i < 4; ++i) {
-		graph[0][i] = graph[i][0] = parseInt(value[i]);
-	}
+  var array_1 = input_val.split('\n');
 
-	for (k = 0; k < 4; ++k) {
-		for (i = 0; i < 4; ++i) {
-			for (j = 0; j < 4; ++j) {
-				if (graph[i][j] > graph[i][k] + graph[k][j])
-					graph[i][j] = graph[i][k] + graph[k][j]
-			}
-		}
-	}
+  
 
-	return graph;
-	// refernce : https://titanwolf.org/Network/Articles/Article?AID=d244e440-0d8c-4d97-9965-8b6c4b3b3b55#gsc.tab=0
+  for (
+    var i = 0; 
+    i < array_1.length;
+     i++
+    ) 
+  {
+
+    input_array[i] = array_1[i].split(',');
+
+  }
+
+  var box = input_array;
+
+  for(
+    var i = 0; 
+    i < input_array.length; 
+    i++
+    )
+  {
+
+    for(
+      var j=0;
+      j<input_array.length;
+      j++
+      )
+    {
+
+      box[i][j] = parseInt(input_array[i][j]);
+
+    }
+
+  }
+
+
+  var count = box.length;
+
+  var result = box;
+
+
+  for (
+    var i = 0;
+     i < count; 
+     i++
+     ) 
+  {
+
+    for (
+      var j = 0;
+       j < count; 
+       j++
+       ) 
+    {
+      for (
+        var k = 0;
+         k < count; 
+         k++
+         )
+      {
+
+        result[i][j] = ( result[i][j] || ( result[i][k] && result[k][j] ) );
+      }
+    }
+
+    if (i == count-1)
+    {
+
+      display(result);
+
+    }
+
+  }
+}
+  function display(result){
+
+  var count = result.length;
+
+  for (
+    var i = 0;
+     i< count;
+      i++)
+  {
+
+    divOutput.innerHTML += "<br />";
+
+    for (
+      var j = 0;
+      j<count;
+      j++
+      )
+    {
+
+      divOutput.innerHTML += result[i][j];
+
+      divOutput.innerHTML += " ";
+
+    }
+
+  }
+	//Mention reference where you got the solution
+  // Ref : Book
 }//end sol1
